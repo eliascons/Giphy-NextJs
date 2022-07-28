@@ -27,6 +27,8 @@ export default authenticateJWT( async function  handler(req, res) {
             console.log(error);
             res.status(400);
         }
+    }else{
+        res.json({message: 'Only GET or POST are allowed from this route'});
     }
 
 });

@@ -1,4 +1,4 @@
-import { NextResponse } from 'next/server';
+
 import jwt from 'jsonwebtoken';
 
 
@@ -15,7 +15,6 @@ const authenticateJWT = (fu) => async(req, res) => {
     jwt.verify(token, accessTokenSecret, async function(err, user) {
         if(!err && user){
             req.user = user;
-            console.log(req.user); 
             return await fu(req,res);
         }
         

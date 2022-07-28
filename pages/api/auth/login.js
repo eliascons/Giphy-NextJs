@@ -35,5 +35,7 @@ export default async function handler(req, res) {
             res.status(400).json('error');
         }
 
+    }else{
+        res.send('Only POST is accepted on this route');
     }
 }

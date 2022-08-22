@@ -7,18 +7,15 @@ export default async function handler(req, res) {
     const { username, password } = req.body;
 
     if(method === 'POST'){
-        console.log('test');
         let user = await User.findOne({ username: username });
         console.log(user);
-        if(user){
-            console.log('user exist');
-            res.send('userExist');
+        if(user){            
+            res.status(409).json({message: 'User already exists!'});
             return;
         }else{
             try{
                 const createdUser = await User.create({username: username, password: password});
-                console.log(`created user ${createdUser}`);
-                res.send(createdUser)
+                res.status(200).json({message: 'Created user successfully!'});
             }catch(error){
                 console.log(error);
                 res.status(400);

@@ -1,0 +1,15 @@
+.container {
+    display: flex;
+    flex-wrap: wrap;
+
+
+}
+
+.imgContainer {
+    display: grid;
+    align-content: center;
+}
+
+.title {
+    margin-left: 50%;
+}

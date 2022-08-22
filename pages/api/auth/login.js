@@ -1,41 +1,74 @@
+
 import User from '../../../models/User.js';
-import connectMongo from '../../../lib/connectMongo.js';
+import connectMongo from "../../../lib/connectMongo.js";
 import jwt from "jsonwebtoken";
+import cookie from "cookie"; 
+
 
 connectMongo();
 
 const accessTokenSecret = process.env.JWT_SECRET;
+// const refreshTokenSecret = process.env.JWT_REFRESH;
+
+// let refreshTokens = [];
 
 export default async function handler(req, res) {
-    const { method } = req;
-    const { username, password } = req.body;
+  const { method } = req;
+  const { username, password } = req.body;
 
-    if (method === 'POST') {
-        try {
-            let user = await User.findOne({ username: username });
-            if (user) {
-                if (password === user.password) {
+  
+  if (method === "POST") {
 
-                    const accessToken = jwt.sign(
-                        { username: user.username, id: user._id },
-                        accessTokenSecret,
-                        { expiresIn: "120m" }
-                    );
-                    res.json(accessToken);
-                }else{
-                    res.status(401).json('Invalid password ');
-                    return;
-                }
-            } else {
-                res.status(401).json('Invalid credentials user not found');
-                return;
-            }
-        } catch (error) {
-            console.log(error);
-            res.status(400).json('error');
+    try {
+
+      let user = await User.findOne({ username: username });
+
+      if (user) {
+        if (password === user.password) {
+          const accessToken = jwt.sign(
+            { username: user.username, id: user._id },
+            accessTokenSecret,
+            { expiresIn: "120m" }
+          );
+
+          // const refreshToken = jwt.sign(
+          //   { username: user.username, id: user._id },
+          //   refreshTokenSecret
+          // );
+
+          // refreshTokens.push(refreshToken);
+    
+          // This is for cookies
+          res.setHeader(
+            "Set-Cookie",
+            cookie.serialize("auth", accessToken, {
+              httpOnly: true,
+              secure: process.env.NODE_ENV !== "development",
+              sameSite: "strict",
+              maxAge: 3600,
+              path: "/",
+            })
+          );
+
+          // res.json({
+          //   accessToken,
+          //   refreshToken,
+          // });
+
+          res.status(200).json({ message: "Welcome back to app" });
+        } else {
+          res.status(401).json("Invalid password ");
+          return;
         }
-
-    }else{
-        res.send('Only POST is accepted on this route');
+      } else {
+        res.status(401).json("Invalid credentials user not found");
+        return;
+      }
+    } catch (error) {
+      console.log(error);
+      res.status(400).json({message:"error"});
     }
+  } else {
+    res.send("Only POST is accepted on this route");
+  }
 }

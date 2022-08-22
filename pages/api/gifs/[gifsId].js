@@ -5,9 +5,8 @@ import authenticateJWT from '../../middleware/authJWT.js';
 connectMongo();
 
 export default authenticateJWT (async (req, res) => {
-    // destructure query and method object from req
+   
     const { method } = req;
-    // gifsId it has to match the name of the file otherwise wont work
     const { gifsId } = req.query;
 
     if (method === 'PUT') {

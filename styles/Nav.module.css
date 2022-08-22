@@ -25,3 +25,9 @@
     text-decoration: none;
     background: rgb(78, 75, 54);
   }
+
+.alignRight{
+    float: right;
+    margin-top: 10px;
+    margin-right: 30px;
+}

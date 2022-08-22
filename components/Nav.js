@@ -2,10 +2,27 @@ import Link from "next/link";
 import styles from "../styles/Nav.module.css";
 import { UserContext, LogContext } from "../pages/context/userContext.js";
 import { useContext } from "react";
+import { useRouter } from "next/router";
 
 function Nav() {
-  const { isLogged } = useContext(LogContext);
+  const { isLogged, setIslogged } = useContext(LogContext);
   const { user } = useContext(UserContext);
+
+  const router = useRouter();
+
+  const handleLogout = async () => {
+    const response = await fetch("http://localhost:3000/api/auth/logout", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({}),
+    });
+    setIslogged(false);
+    await router.push("/");
+  };
+
+  const handleLogin = async () => {
+    await router.replace("http://localhost:3000/containers/login");
+  };
 
   return (
     <div className={styles.body}>
@@ -22,15 +39,15 @@ function Nav() {
       <Link href="/containers/register">
         <a className={styles.links}>Register</a>
       </Link>
-      <div className={styles.links}>
-        {!isLogged ? (
-          <Link href="/containers/login">
-            <a className={styles.links}>Login</a>
-          </Link>
-        ) : (
-          <div>{user}</div>
-        )}
-      </div>
+     
+        <div className={styles.alignRight}>
+          {!isLogged ? (
+            <button onClick={handleLogin}>Login</button>
+          ) : (
+            <button onClick={handleLogout}>{user}</button>
+          )}
+        </div>
+  
     </div>
   );
 }

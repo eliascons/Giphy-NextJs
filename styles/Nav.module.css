@@ -12,22 +12,46 @@
 
 .links{
     color: rgb(219, 226, 226);
-    padding: 10px;
-    margin: 10px;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    
     display: inline-block;
     text-decoration: none;
-    border-radius: 50%;
+    margin-top: 10px;
     
-    
+}
+
+.links:first-child{
+    border-bottom-left-radius: 60%; 
+}
+
+.links:nth-last-child(2){
+    border-bottom-right-radius: 60%; 
 }
 
 .links:hover {
     text-decoration: none;
-    background: rgb(78, 75, 54);
+    background: linear-gradient(to top,rgb(88, 127, 199), rgb(2, 2, 2)); ;
   }
 
 .alignRight{
     float: right;
     margin-top: 10px;
     margin-right: 30px;
+}
+
+.btn {
+    background: hsl(210, 1%, 36%);
+    color: white;
+    border: none;
+    padding: .5em .75em;
+    border-radius: .25em;
+    transition: .2s;
+}
+
+.btn:hover{
+    background: rgb(88, 127, 199);
+    transition: .2s;
 }

@@ -42,9 +42,9 @@ function Nav() {
      
         <div className={styles.alignRight}>
           {!isLogged ? (
-            <button onClick={handleLogin}>Login</button>
+            <button onClick={handleLogin} className={styles.btn}>Login</button>
           ) : (
-            <button onClick={handleLogout}>{user}</button>
+            <button onClick={handleLogout} className={styles.btn}>{user}</button>
           )}
         </div>
   

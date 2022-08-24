@@ -4,7 +4,7 @@ import fetch from "isomorphic-unfetch";
 import { useState } from "react";
 import axios from "axios";
 import styles from "../../styles/saved.module.css";
-
+import Display from "../../components/Display.js";
 
 Save.getInitialProps = async (ctx) => {
   const cookie = ctx.req?.headers.cookie;
@@ -47,21 +47,8 @@ function Save({ gifs }) {
       <Head>
         <title>Saved</title>
       </Head>
-      <h1>Saved</h1>
-      <div className={styles.container}>
-        {myGifs.map((gif, i) => {
-          return (
-            <div key={i} className={styles.imgContainer}>
-              <div className={styles.imgItems}>
-                <div className={styles.image}>
-                  <img src={gif.url} alt={gif}></img>
-                </div>
-                <button onClick={() => handleRemove(gif._id)}>Delete</button>
-              </div>
-            </div>
-          );
-        })}
-      </div>
+      <h1 className={styles.title}>Saved</h1>
+      <Display arr={myGifs} func={handleRemove} text="Delete" styles={styles} />
     </div>
   );
 }

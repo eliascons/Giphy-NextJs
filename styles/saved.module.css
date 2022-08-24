@@ -1,36 +1,88 @@
-
-
-
-.container{
+.title{
+    margin-left: 45%;
+}
+.container {
     display: grid;
-    grid-template-columns: repeat(3, 12rem);
-    grid-auto-rows: 100px, 100px;
-    gap: 0px;
-    margin: 20px;
+    grid-template-columns: repeat(auto-fit, 255px);
+    grid-auto-rows: auto;
+    gap: 1px;
+    margin-left: 150px;
+    margin-right: 100px;
+}
+
+.galleryContainer:hover {
+    border: solid rgb(218, 140, 24);
+}
+
+.galleryContainer:active {
+    border: solid rgb(235, 44, 11);
    
-    
+
 }
 
-.imgContainer{
-  
-     
-}
 
-/* .imgItems{
+.galleryItem {
     width: 100%;
     height: 100%;
     position: relative;
-} */
 
-/* .imgItems .image{
+}
+
+.galleryItem .image {
     width: 100%;
     height: 100%;
     overflow: hidden;
-} */
+    position: relative;
+}
 
-/* .imgItems .image .img{
+.galleryItem .image img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-} */
+    object-position: 50% 50%;
+    cursor: pointer;
+    transition: .5 ease-in-out;
+    
+}
 
+.galleryItem:hover .image img {
+    transform: scale(1.5);
+}
+
+.galleryItem .button {
+    opacity: 0;
+    position: absolute;
+    top: 80%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: black;
+    font-size: 30px;
+    pointer-events: none;
+    z-index: 4;
+    transition: .3 ease-in-out;
+
+}
+
+
+
+.galleryItem:hover .button {
+    opacity: 1;
+    animation: move-down .1s linear;
+    padding: 1em;
+    width: 100%;
+
+}
+
+@keyframes move-down {
+    0% {
+        top: 10%;
+    }
+
+    50% {
+        top: 35%;
+    }
+
+    100% {
+        top: 50%;
+    }
+}

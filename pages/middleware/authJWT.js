@@ -16,6 +16,7 @@ const authenticateJWT = (fu) => async (req, res) => {
     jwt.verify(cookie, accessTokenSecret, async (err, user) => {
       if (!err && user) {
         req.user = user;
+        
         await fu(req, res);
         return resolve();
       }

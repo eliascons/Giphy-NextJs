@@ -3,6 +3,9 @@ import { UserContext, LogContext } from "./context/userContext.js";
 import { useState } from "react";
 import "../styles/global.css";
 
+
+
+
 export default function App({ Component, pageProps }) {
 
   const [user, setUser] = useState('');

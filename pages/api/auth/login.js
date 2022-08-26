@@ -55,7 +55,7 @@ export default async function handler(req, res) {
           //   refreshToken,
           // });
 
-          res.status(200).json({ message: "Welcome back to app" });
+          res.status(200).json({ message: "Welcome back to app"});
         } else {
           res.status(401).json("Invalid password ");
           return;

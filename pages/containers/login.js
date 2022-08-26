@@ -4,7 +4,6 @@ import axios from "axios";
 import { UserContext, LogContext } from "../context/userContext.js";
 import { useContext } from "react";
 
-
 function Login() {
   const { setUser } = useContext(UserContext);
   const { setIslogged } = useContext(LogContext);
@@ -16,16 +15,24 @@ function Login() {
 
   const login = async (e) => {
     e.preventDefault();
-    const res = await axios.post("/api/auth/login", {
-      username: username,
-      password: password,
-    });
-    if (res.status === 200) {
-      setUser(username);
-      setIslogged(true);
+
+    try {
+      const res = await axios.post("/api/auth/login", {
+        username: username,
+        password: password,
+      });
+
+      if (res.status === 200) {
+        setUser(username);
+        setIslogged(true);
+        await router.push("/");
+      }
+    } catch (err) {
+      console.log(err);
+      console.log("Error invalid username or password");
     }
 
-    await router.push("/");
+    
   };
 
   return (

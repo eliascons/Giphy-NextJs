@@ -3,6 +3,7 @@ import Router from "next/router";
 import { useState } from "react";
 import axios from "axios";
 import styles from "../../styles/search.module.css";
+import { FaSearch } from 'react-icons/fa';
 
 // import styles from '../styles/home.module.css';
 
@@ -39,7 +40,7 @@ function Search({ cookie }) {
 
     try {
       const response = await fetch(
-        `https://api.giphy.com/v1/gifs/search?api_key=Z8DTlGW5al5HYivAGm88KL6ov2MtCgbf&q=${input}&limit=30&offset=0&rating=g&lang=en`,
+        `https://api.giphy.com/v1/gifs/search?api_key=Z8DTlGW5al5HYivAGm88KL6ov2MtCgbf&q=${input}&limit=60&offset=0&rating=g&lang=en`,
         { method: "GET" }
       );
       const data = await response.json();
@@ -59,13 +60,18 @@ function Search({ cookie }) {
 
       <h1 className={styles.title}>Search</h1>
 
-      <input
-        type="text"
-        value={input}
-        onChange={(e) => setInput(e.target.value)}
-        className={styles.title}
-      ></input>
-      <button onClick={handleSearch}>Search</button>
+      <div className={styles.searchContainer}>
+      
+        <input
+          type="text"
+          value={input}
+          onChange={(e) => setInput(e.target.value)}
+          className={styles.searchBox}
+        ></input>
+        <button onClick={handleSearch} className={styles.searchButton}>
+        <FaSearch/>
+        </button>
+      </div>
 
       <div className={styles.container}>
         {gifs.map((gif, index) => {
@@ -77,7 +83,11 @@ function Search({ cookie }) {
             >
               <div className={styles.galleryItem}>
                 <div className={styles.image}>
-                  <img src={gif.images.fixed_width.url} alt="gif" className={styles.cardImg}></img>
+                  <img
+                    src={gif.images.fixed_width.url}
+                    alt="gif"
+                    className={styles.cardImg}
+                  ></img>
                 </div>
               </div>
             </section>

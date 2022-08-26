@@ -1,5 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Silkscreen&display=swap');
+
 .title{
-    margin-left: 45%;
+    display: flex;
+    justify-content: center;
+    font-size: 2.5em;
+    color: rgb(0, 0, 0);
+    cursor:default;
+    font-family: 'Silkscreen', cursive;
 }
 .container {
     display: grid;
@@ -11,11 +18,13 @@
 }
 
 .galleryContainer:hover {
-    border: solid rgb(47, 113, 255);
+    border: solid rgb(47, 113, 255) 4px;
+    
 }
 
 .galleryContainer:active {
-    border: solid rgb(7, 179, 44);
+    border: solid rgb(7, 179, 44) ;
+    border-width: thick;
 
 }
 

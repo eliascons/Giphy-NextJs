@@ -4,8 +4,7 @@ import { useState } from "react";
 import axios from "axios";
 import styles from "../../styles/search.module.css";
 import { FaSearch } from 'react-icons/fa';
-
-// import styles from '../styles/home.module.css';
+import Display from "../../components/Display.js";
 
 export async function getServerSideProps(ctx) {
   const cookie = ctx.req?.headers.cookie;
@@ -55,7 +54,7 @@ function Search({ cookie }) {
   return (
     <>
       <Head>
-        <title>Search</title>
+        <title>Giphy-App - Search</title>
       </Head>
 
       <h1 className={styles.title}>Search</h1>
@@ -72,7 +71,7 @@ function Search({ cookie }) {
         <FaSearch/>
         </button>
       </div>
-
+     
       <div className={styles.container}>
         {gifs.map((gif, index) => {
           return (

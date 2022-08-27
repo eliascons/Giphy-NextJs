@@ -1,4 +1,4 @@
-import Head from "next/head";
+
 import axios from "axios";
 import styles from "../styles/home.module.css";
 import { useContext, useState } from "react";
@@ -40,9 +40,7 @@ export default function Home({ gifs }) {
 
   return (
     <div>
-      <Head>
-        <title>Giphy-App</title>
-      </Head>
+
 
       <h1 className={styles.title}>Trending</h1>
 

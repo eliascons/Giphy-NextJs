@@ -9,7 +9,7 @@ import Display from "../../components/Display.js";
 Save.getInitialProps = async (ctx) => {
   const cookie = ctx.req?.headers.cookie;
 
-  const response = await fetch("http://localhost:3000/api/gifs", {
+  const response = await fetch("/api/gifs", {
     headers: { cookie: cookie },
   });
 
@@ -20,7 +20,7 @@ Save.getInitialProps = async (ctx) => {
 
   if (response.status === 401 && ctx.req) {
     ctx.res.writeHead(302, {
-      Location: "http://localhost:3000/containers/login",
+      Location: "/containers/login",
     });
 
     ctx.res?.end();
@@ -45,7 +45,7 @@ function Save({ gifs }) {
   return (
     <div>
       <Head>
-        <title>Saved</title>
+        <title>Giphy-App - Saved</title>
       </Head>
       <h1 className={styles.title}>Saved</h1>
       <Display arr={myGifs} func={handleRemove} text="Delete" styles={styles} />

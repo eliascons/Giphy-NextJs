@@ -1,4 +1,6 @@
-function Display({ arr, func, text, styles }) {
+
+
+function Display({ arr, func, styles }) {
   return (
     <div className={styles.container}>
       {arr.map((gif, i) => {

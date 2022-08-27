@@ -2,9 +2,9 @@ import { useState, useContext } from "react";
 import { useRouter } from "next/router";
 import { UserContext, LogContext } from "../context/userContext.js";
 import axios from "axios";
+import styles from "../../styles/register.module.css";
 
 function Register() {
-
   const { setUser } = useContext(UserContext);
   const { setIslogged } = useContext(LogContext);
 
@@ -25,32 +25,39 @@ function Register() {
     });
     setIslogged(true);
     setUser(username);
-    
 
     await router.push("/");
   };
 
   return (
-    <form>
-      <h2>Register:</h2>
-      <input
-        placeholder="Username"
-        type="text"
-        value={username}
-        onChange={(e) => setUsername(e.target.value)}
-      ></input>
-      <br />
-      <input
-        type="password"
-        placeholder="Password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-      ></input>
-      <br />
-      <button type="submit" onClick={(e) => register(e)}>
-        Register
-      </button>
-    </form>
+    <div className={styles.center}>
+      <h1>Register</h1>
+      <form>
+        <div className={styles.txt_field}>
+          <input
+            placeholder="Username"
+            type="text"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+          ></input>
+          <span></span>
+          <label>Username</label>
+        </div>
+        <div className={styles.txt_field}>
+          <input
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          ></input>
+          <span></span>
+          <label>Password</label>
+        </div>
+        <button type="submit" onClick={(e) => register(e)} className={styles.btn}>
+          Register
+        </button>
+      </form>
+    </div>
   );
 }
 

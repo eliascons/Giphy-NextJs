@@ -10,22 +10,49 @@
     color: rgb(0, 0, 0);
     cursor:default;
     font-family: 'Silkscreen', cursive;
+
 }
 .container {
+
+
+
+  /**
+   * User input values.
+   */
+   --grid-layout-gap: 10px;
+   --grid-column-count: 5;
+   --grid-item--min-width: 100px;
+ 
+   /**
+    * Calculated values.
+    */
+   --gap-count: calc(var(--grid-column-count) - 1);
+   --total-gap-width: calc(var(--gap-count) * var(--grid-layout-gap));
+   --grid-item--max-width: calc((100% - var(--total-gap-width)) / var(--grid-column-count));
+
     display: grid;
-    grid-template-columns: repeat(auto-fit, 255px);
-    grid-auto-rows: auto;
-    gap: 1px;
+    /* grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); */
+    grid-template-columns: repeat(auto-fill, minmax(max(var(--grid-item--min-width), var(--grid-item--max-width)), 1fr));
+    grid-auto-rows: 250px;
+    gap: 10px;
     margin-left: 150px;
     margin-right: 100px;
+
+}
+
+.galleryContainer {
+    border: solid rgb(10, 10, 10) 8px;
+    border-radius: 10px;
+   
+
 }
 
 .galleryContainer:hover {
-    border: solid rgb(218, 140, 24);
+    border: solid rgb(7, 60, 236);
 }
 
 .galleryContainer:active {
-    border: solid rgb(235, 44, 11);
+    border: solid rgb(8, 235, 65);
    
 
 }
@@ -48,7 +75,7 @@
 .galleryItem .image img {
     width: 100%;
     height: 100%;
-    object-fit: fill;
+    object-fit:fill;
     object-position: 50% 50%;
     cursor: pointer;
     transition: .5 ease-in-out;
@@ -59,19 +86,7 @@
     transform: scale(1.5);
 }
 
-.galleryItem .button {
-    opacity: 0;
-    position: absolute;
-    top: 80%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: black;
-    font-size: 30px;
-    pointer-events: none;
-    z-index: 4;
-    transition: .3 ease-in-out;
 
-}
 
 
 

@@ -12,6 +12,7 @@ function Login() {
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [isError, setIsError] = useState(false);
 
   const router = useRouter();
 
@@ -27,9 +28,11 @@ function Login() {
       if (res.status === 200) {
         setUser(username);
         setIslogged(true);
+        setIsError(false);
         await router.push("/");
       }
     } catch (err) {
+      setIsError(true);
       console.log(err);
       console.log("Error invalid username or password");
     }
@@ -70,6 +73,9 @@ function Login() {
           >
             Login
           </button>
+          <br/>
+          <br/>
+          {isError === true? <li>Invalid Username or password</li>: null}
         </form>
       </div>
     </div>

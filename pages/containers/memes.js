@@ -5,15 +5,15 @@ import styles from "../../styles/memes.module.css";
 function Memes() {
   const [memes, setMemes] = useState([]);
 
-  useEffect(async () => {
-    try {
-      const response = await axios.get("https://www.reddit.com/r/memes/.json");
-      setMemes(response.data.data.children);
-      console.log(response.data.data.children);
-    } catch (err) {
-      console.log(err);
-    }
-  }, []);
+  // useEffect(async () => {
+  //   try {
+  //     const response = await axios.get("https://www.reddit.com/r/memes/.json");
+  //     setMemes(response.data.data.children);
+  //     console.log(response.data.data.children);
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // }, []);
   //   console.log(memes)
   return (
     <div>
@@ -47,9 +47,12 @@ function Memes() {
                 
               </section>
               
+              
             );
           })}
+          
       </div>
+      <div className={styles.msg}>Memes will be disabled, for now...</div>
     </div>
   );
 }

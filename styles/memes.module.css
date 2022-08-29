@@ -3,7 +3,6 @@
 
 
 .title{
-    font-family: sans-serif;
     display: flex;
     justify-content: center;
     font-size: 2.5em;
@@ -110,4 +109,10 @@
     100% {
         top: 50%;
     }
+}
+
+.msg{
+    text-align: center;
+    font-size: 1.5em;
+    font-family: 'Silkscreen', cursive;
 }

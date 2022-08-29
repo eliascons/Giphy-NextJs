@@ -22,44 +22,41 @@ export default async function handler(req, res) {
     try {
 
       let user = await User.findOne({ username: username });
-
+      
       if (user) {
-        if (password === user.password) {
-          const accessToken = jwt.sign(
-            { username: user.username, id: user._id },
-            accessTokenSecret,
-            { expiresIn: "120m" }
-          );
 
-          // const refreshToken = jwt.sign(
-          //   { username: user.username, id: user._id },
-          //   refreshTokenSecret
-          // );
+        user.comparePassword(password, function (err, isMatch){
+          if(err) throw err;
 
-          // refreshTokens.push(refreshToken);
-    
-          // This is for cookies
-          res.setHeader(
-            "Set-Cookie",
-            cookie.serialize("auth", accessToken, {
-              httpOnly: true,
-              secure: process.env.NODE_ENV !== "development",
-              sameSite: "strict",
-              maxAge: 3600,
-              path: "/",
-            })
-          );
+          if (isMatch) {
+            const accessToken = jwt.sign(
+              { username: user.username, id: user._id },
+              accessTokenSecret,
+              { expiresIn: "120m" }
+            );
+  
 
-          // res.json({
-          //   accessToken,
-          //   refreshToken,
-          // });
+      
+            res.setHeader(
+              "Set-Cookie",
+              cookie.serialize("auth", accessToken, {
+                httpOnly: true,
+                secure: process.env.NODE_ENV !== "development",
+                sameSite: "strict",
+                maxAge: 3600,
+                path: "/",
+              })
+            );
+  
+            res.status(200).json({ message: "Welcome back to app"});
+          } else {
+            res.status(401).json("Invalid credentials");
+            return;
+          }
 
-          res.status(200).json({ message: "Welcome back to app"});
-        } else {
-          res.status(401).json("Invalid password ");
-          return;
-        }
+        });
+
+
       } else {
         res.status(401).json("Invalid credentials user not found");
         return;

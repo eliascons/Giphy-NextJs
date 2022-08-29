@@ -8,8 +8,8 @@ import Display from "../../components/Display.js";
 
 Save.getInitialProps = async (ctx) => {
   const cookie = ctx.req?.headers.cookie;
-
-  const response = await fetch("/api/gifs", {
+  
+  const response = await fetch("http://localhost:3000/api/gifs", {
     headers: { cookie: cookie },
   });
 

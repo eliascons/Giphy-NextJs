@@ -8,7 +8,7 @@ export default async function handler(req, res) {
 
     if(method === 'POST'){
         let user = await User.findOne({ username: username });
-        console.log(user);
+        
         if(user){            
             res.status(409).json({message: 'User already exists!'});
             return;

@@ -12,18 +12,46 @@ function Register() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
+  const [userCheck, setUserCheck] = useState(true);
+  const [passCheck, setPassCheck] = useState(true);
+  const [exists, setExists] = useState(false);
+
   const router = useRouter();
 
   const register = async (e) => {
     e.preventDefault();
-    const RegisterResponse = await axios.post("/api/auth/register", {
-      username: username,
-      password: password,
-    });
+
+    if (username.length < 5) {
+      console.log("Please enter a valid username");
+      setUserCheck(false);
+      return;
+    } else {
+      setUserCheck(true);
+    }
+
+    if (password.length < 8) {
+      console.log("Please enter a valid password");
+      setPassCheck(false);
+      return;
+    } else {
+      setPassCheck(true);
+    }
+    try {
+      const registerResponse = await axios.post("/api/auth/register", {
+        username: username,
+        password: password,
+      });
+    } catch (error) {
+      console.log(error);
+      setExists(true);
+      return;
+    }
+
     const LoginResponse = await axios.post("/api/auth/login", {
       username: username,
       password: password,
     });
+
     setIslogged(true);
     setUser(username);
 
@@ -65,6 +93,13 @@ function Register() {
           >
             Register
           </button>
+          <ul>
+            {!userCheck ? <li>User must be longer than 5 characters</li> : null}
+            {!passCheck ? (
+              <li>Password must be longer than 8 characters</li>
+            ) : null}
+            {exists ? <li>User already exist</li> : null}
+          </ul>
         </form>
       </div>
     </div>

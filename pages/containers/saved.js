@@ -6,30 +6,30 @@ import axios from "axios";
 import styles from "../../styles/saved.module.css";
 import Display from "../../components/Display.js";
 
-// Save.getInitialProps = async (ctx) => {
-//   const cookie = ctx.req?.headers.cookie;
+Save.getInitialProps = async (ctx) => {
+  const cookie = ctx.req?.headers.cookie;
   
-//   const response = await fetch("http://localhost:3000/api/gifs", {
-//     headers: { cookie: cookie },
-//   });
+  const response = await fetch("https://giphy-next-js.vercel.app/api/gifs", {
+    headers: { cookie: cookie },
+  });
 
-//   if (response.status === 401 && !ctx.req) {
-//     Router.replace("/containers/login");
-//     return {};
-//   }
+  if (response.status === 401 && !ctx.req) {
+    Router.replace("/containers/login");
+    return {};
+  }
 
-//   if (response.status === 401 && ctx.req) {
-//     ctx.res.writeHead(302, {
-//       Location: "/containers/login",
-//     });
+  if (response.status === 401 && ctx.req) {
+    ctx.res.writeHead(302, {
+      Location: "/containers/login",
+    });
 
-//     ctx.res?.end();
-//     return;
-//   }
+    ctx.res?.end();
+    return;
+  }
 
-//   const data = await response.json();
-//   return { gifs: { data } };
-// };
+  const data = await response.json();
+  return { gifs: { data } };
+};
 
 function Save({ gifs }) {
   const [myGifs, setMyGifs] = useState(gifs.data);
@@ -48,7 +48,7 @@ function Save({ gifs }) {
         <title>Giphy-App - Saved</title>
       </Head>
       <h1 className={styles.title}>Saved</h1>
-      {/* <Display arr={myGifs} func={handleRemove} text="Delete" styles={styles} /> */}
+      <Display arr={myGifs} func={handleRemove} text="Delete" styles={styles} />
     </div>
   );
 }

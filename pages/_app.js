@@ -1,5 +1,5 @@
 import Nav from "../components/Nav.js";
-import { UserContext, LogContext } from "./context/userContext.js";
+import { UserContext, LogContext } from "../context/context.js";
 import { useState } from "react";
 import "../styles/global.css";
 import Head from "next/head";

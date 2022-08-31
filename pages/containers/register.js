@@ -1,6 +1,6 @@
 import { useState, useContext } from "react";
 import { useRouter } from "next/router";
-import { UserContext, LogContext } from "../context/userContext.js";
+import { UserContext, LogContext } from "../../context/context.js";
 import axios from "axios";
 import styles from "../../styles/register.module.css";
 import Head from "next/head";

@@ -1,6 +1,6 @@
 import Link from "next/link";
 import styles from "../styles/Nav.module.css";
-import { UserContext, LogContext } from "../pages/context/userContext.js";
+import { UserContext, LogContext } from "../context/context.js";
 import { useContext, useEffect } from "react";
 import { useRouter } from "next/router";
 import axios from "axios";

@@ -2,7 +2,7 @@
 import axios from "axios";
 import styles from "../styles/home.module.css";
 import { useContext, useState } from "react";
-import { LogContext } from "../pages/context/userContext.js";
+import { LogContext } from "../context/context.js";
 import Router from "next/router";
 
 const API_KEY = process.env.API_KEY;

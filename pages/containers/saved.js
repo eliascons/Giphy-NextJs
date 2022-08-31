@@ -9,7 +9,7 @@ import Display from "../../components/Display.js";
 Save.getInitialProps = async (ctx) => {
   const cookie = ctx.req?.headers.cookie;
   // test
-  const response = await fetch("/api/gifs", {
+  const response = await fetch("https://giphy-next-js.vercel.app/api/gifs", {
     headers: { cookie: cookie },
   });
 

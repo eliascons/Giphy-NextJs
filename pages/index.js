@@ -65,6 +65,8 @@ export default function Home({ gifs }) {
           );
         })}
       </div>
+      
+      <div className={styles.info}>Contact: eliasconsalvo@gmail.com</div>
     </div>
   );
 }

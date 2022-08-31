@@ -14,7 +14,7 @@ function Nav() {
 
   useEffect(async () => {
     try {
-      const res = await axios.get("http://localhost:3000/api/user/username");
+      const res = await axios.get("/api/user/username");
       setUser(res.data.user);
       setIslogged(true);
     } catch (e) {
@@ -26,7 +26,7 @@ function Nav() {
   const router = useRouter();
 
   const handleLogout = async () => {
-    const response = await fetch("http://localhost:3000/api/auth/logout", {
+    const response = await fetch("/api/auth/logout", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({}),
@@ -36,7 +36,7 @@ function Nav() {
   };
 
   const handleLogin = async () => {
-    await router.replace("http://localhost:3000/containers/login");
+    await router.replace("/containers/login");
   };
 
   return (

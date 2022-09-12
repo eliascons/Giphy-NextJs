@@ -1,25 +1,23 @@
 
 import axios from "axios";
 import styles from "../styles/home.module.css";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { LogContext } from "../context/context.js";
 import Router from "next/router";
 
-const API_KEY = process.env.API_KEY;
-
-export async function getStaticProps() {
-  const response = await fetch(
-    `https://api.giphy.com/v1/gifs/trending?api_key=${API_KEY}&limit=12&rating=g`
-  );
-
-  const data = await response.json();
-
-  return { props: { gifs: data } };
-}
 
 export default function Home({ gifs }) {
-  const [trendingGifs] = useState(gifs.data);
+  const [trendingGifs, setTrendingGifs] = useState([]);
   const { isLogged } = useContext(LogContext);
+
+  useEffect(async () => {
+    const response = await fetch(
+      `https://api.giphy.com/v1/gifs/trending?api_key=Z8DTlGW5al5HYivAGm88KL6ov2MtCgbf&limit=12&rating=g`
+    );
+      let data = await response.json();
+     
+    setTrendingGifs(data.data);
+  }, []);
 
   const verify = () => {
     if (!isLogged) {
